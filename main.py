@@ -71,17 +71,22 @@ def main():
         print("検索したいリストを選んでください：")
         for key, value in lists.items():
             print(f"{key}: {value}")
-        print("99: プログラムを終了")
+        print("99: 全てのリストを読み込む")
+        print("999: プログラムを終了")
 
         # 数値を入力してリストを選択
         option = input("番号を入力してください：")
-        if option == "99":
+        if option == "999":
             print("プログラムを終了します。")
             break
 
         try:
             # 選択したリストからサーチ
-            if option in lists:
+            if option == "99":
+                for list_item in lists.values():
+                    media_search.get_soup(list_item)
+                print("すべてのHTMLファイルを読み込みました。")
+            elif option in lists:
                 media_type = lists[option]
                 search_term = input("検索したいテキストを入力してください: ").strip()
                 results = media_search.search_media(media_type, search_term)
